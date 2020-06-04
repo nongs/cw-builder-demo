@@ -1,0 +1,60 @@
+
+<div class="dr dr_image" ng-controller="drController" ng-class="{ 'disable':disable }" ng-click="enableDr($event)">
+		<div class="dr_wrapper">
+		<div class="function clearfix">
+			<!-- <button class="icon_button drag drag_horizontal" dnd-handle>이동</button>
+			<span class="separator">&nbsp;</span> -->
+		    <button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+		    <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+		    <button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+		    <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+			<button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+			<span class="separator">&nbsp;</span>
+			<button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)">복제</button>
+			<span class="separator">&nbsp;</span>
+			<button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+		</div>
+	      <h3 class="dr_type_label">IMAGE</h3>
+
+		<input type="text" class="title" placeholder="제목을 입력해 주세요"
+		ng-model="dr.title"
+		ng-click="dr_clear_default($index, $event, dr.title, 'dr')"
+		ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+		/>
+
+		<div flow-init="{singleFile:true}" flow-files-submitted="$flow.upload()" flow-file-added="isImageAdded($file, $event, $flow)" class="uploader">
+			<div class="drop" flow-drop="" ng-class="dropClass">
+				<button class="button" flow-btn="">이미지 업로드
+					<input type="file" multiple="multiple" style="visibility: hidden; position: absolute;">
+				</button>
+				<p>이미지를 이곳에 드래그 & 드롭하여 업로드 하세요.</p>
+				<p>지원 가능 확장자 : jpg, jpeg, png, gif</p>
+			</div>
+			<div class="preview">
+				<div ng-if="$flow.files[0] != null" class="thumbnail_container">
+					{{file.name}}
+					<div class="thumbnail" ng-show="$flow.files.length">
+						<img flow-img="$flow.files[0]"/>
+					</div>
+					<div class="btn-group">
+						<a class="btn btn-xs btn-danger" ng-click="$flow.files.shift()">&nbsp;</a>
+					</div>
+					<div class="clear clearfix"></div>
+				</div>
+				<div ng-if="$flow.files[0] == null && dr.images[0] != null">
+						{{file.filename}}
+						<div class="thumbnail" ng-show="dr.images.length">
+							<img ng-src="{{dr.images[0].url}}"/>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-xs btn-danger" ng-click="imageUploadCancleTemp(dr)">&nbsp;</a>
+						</div>
+					</div>
+				</div>
+				<div class="well">
+					<a class="btn btn-small btn-success" ng-click="imageUploadTemp($flow, dr);">파일 저장</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+
+<div dnd-list="cwList.uol" dnd-allowed-types="cwList.allowedTypes">
+	<div class="uol {{ 'uol_' + $index }}"
+	ng-class="{ disable:disable,'showLo':showLo, closed:uol.closed, active:uol.active, selected:uol.selected, hidden:$index != uolActive }"
+	ng-repeat="uol in cwList.uol"
+	dnd-draggable="uol"
+	dnd-type="uol.type"
+	dnd-disable-if="uol.type == 'unknown'"
+	dnd-moved="cwList.uol.splice($index, 1)"
+	dnd-effect-allowed="move">
+		<dnd-nodrag>
+			<div class="lo_container">
+				<div>
+					<lo-directive></lo-directive>
+				</div>
+			</div>
+		</dnd-nodrag>
+	</div>
+	<div class="dndPlaceholder">
+		주제를 옮겨주세요.
+	</div>
+</div>

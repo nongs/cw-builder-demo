@@ -1,0 +1,119 @@
+
+<div class="dr dr_lti" ng-controller="drController" ng-class="{ 'disable':disable }" ng-click="enableDr($event)">
+  <div class="function clearfix">
+    <!-- <button class="icon_button drag drag_horizontal" dnd-handle>이동</button>
+    <span class="separator">&nbsp;</span> -->
+    <button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+    <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+    <button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+    <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+    <button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+    <span class="separator">&nbsp;</span>
+    <button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)">복제</button>
+    <span class="separator">&nbsp;</span>
+    <button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+  </div>
+  <div class="drag"></div>
+  <h3 class="title">LTI</h3>
+  <div class="lti_container">
+    <form>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-md-5">
+            </th>
+            <th class="col-md-1">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="get_past_grade">
+              마감이 지난 성적 받아들이기
+            </td>
+            <td>
+              <div>{{dr.acceptGradesPastDeadline}}</div>
+            </td>
+          </tr>
+          <tr class="button_text">
+            <td>
+              버튼 텍스트
+            </td>
+            <td>
+              <div>{{dr.buttonText}}</div>
+            </td>
+          </tr>
+          <tr class="user_variable">
+            <td>사용자 지정 매개변수
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr class="visible_name">
+            <td>
+              표시 이름
+            </td>
+            <td>
+              <div>{{dr.displayName}}</div>
+            </td>
+          </tr>
+          <tr class="lti_id">
+            <td>
+              LTI ID
+            </td>
+            <td>
+              <div class="lti_id container">&nbsp;</div>
+            </td>
+          </tr>
+          <tr class="lti_url">
+            <td>
+              LTI URL
+            </td>
+            <td>
+              <div class="input_group">
+                <div>{{dr.ltiURL}}</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="target_blank">
+            <td>
+              새 페이지에서 열기
+            </td>
+            <td>
+              <div>{{dr.ltiLaunchTarget}}</div>
+            </td>
+          </tr>
+          <tr class="target_blank_extra">
+            <td>이용자 이메일 요청하기</td>
+            <td>
+              <div>{{dr.requestUsersEmail}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>이용자의 사용자이름 요청하기</td>
+            <td>
+              <div>{{dr.requestUsersUsername}}</div>
+            </td>
+          </tr>
+          <tr class="gain_point">
+            <td>
+              득점
+            </td>
+            <td>
+              <div>{{dr.scored}}</div>
+            </td>
+          </tr>
+          <tr class="extra_point">
+            <td>
+              가중치
+            </td>
+            <td>
+              <div>{{dr.weight}}</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

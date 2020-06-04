@@ -1,0 +1,42 @@
+
+<div class="dr dr_text" ng-controller="drController" ng-class="{ 'disable':disable }" ng-click="enableDr($event)">
+  <!-- <div class="drag drag_horizontal"></div> -->
+  <div class="dr_wrapper">
+      <!-- Start Function -->
+      <div class="function clearfix">
+        <!-- <span class="separator">&nbsp;</span> -->
+        <!-- <button class="icon_button drag drag_horizontal" dnd-handle>이동</button>
+        <span class="separator">&nbsp;</span> -->
+	    <button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+	    <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+	    <button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+	    <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+        <button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+        <span class="separator">&nbsp;</span>
+        <button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)">복제</button>
+        <span class="separator">&nbsp;</span>
+        <button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+        <!-- <button class="icon_button more"></button> -->
+      </div>
+      <!-- End Function -->
+      <h3 class="dr_type_label">TEXT</h3>
+    <!-- <md-input-container> -->
+      <input class="title page-header" type="text" placeholder="제목을 입력해 주세요"
+      ng-model="dr.title"
+      ng-click="dr_clear_default($index, $event, dr.title, 'dr')"
+      ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+      >
+    <!-- </md-input-container> -->
+    <div class="text_form">
+      <div class="editor">
+        <form method="post">
+          <textarea ui-tinymce="tinymceOptions" ng-model="dr.body""></textarea>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="lock">
+    <div class="bg">&nbsp;</div>
+    <div class="icon"></div>
+  </div>
+</div>

@@ -1,0 +1,284 @@
+
+<div class="dr dr_quiz clearfix" ng-controller="drController" ng-click="enableDr($event)">
+	<div class="drag drag_horizontal"></div>
+	<div class="function clearfix">
+		<button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+		<span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+		<button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+		<span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+		<button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+		<span class="separator">&nbsp;</span>
+		<button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)">복제</button>
+		<span class="separator">&nbsp;</span>
+		<button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+	</div>
+	<div class="dr_wrapper">
+		<h3 class="dr_type_label">QUIZ</h3>
+		<div ng-switch="drQuizTabList[dr.drChild.drChildTypeIndex]">
+			<div ng-switch-when="single_choice">
+				<form class="drQuizTabList[dr.drChild.drChildTypeIndex]">
+					<label>문제</label>
+					<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+					></textarea>
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+							</form>
+						</div>
+					</div>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+					<div class="option_container single_choice" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+						<div class="option" ng-repeat="option in dr.drChild.options" dnd-draggable="option" dnd-type="option.type" dnd-disable-if="option.type == 'unknown'" dnd-moved="dr.drChild.options.splice($index, 1)" dnd-effect-allowed="move">
+							<dnd-nodrag>
+								<div class="drag drag_vertical" dnd-handle>&nbsp;</div>
+								<div class="box input-group">
+									<div class="input-group-addon">
+										<input type="radio" name="single_choice_{{$parent.$index}}" value="{{$index}}" class="single_choice_element" ng-model="dr.correct"/>
+									</div>
+									<div class="guiz_option">
+										<input type="text" placeholder="선택지를 입력해주세요." ng-model="option.title" ng-click="option_clear_default($parent.$index, $index, $event, option.title, 'option')" ng-blur="option_input_default($parent.$index, $index, $event, option.title, 'option')"
+										>
+									</div>
+								</div>
+								<button class="remove" ng-click="deleteDrQuizOptions($index, dr.drChild.options)"></button>
+							</dnd-nodrag>
+						</div>
+						<div class="dndPlaceholder">보기를 옮겨주세요.</div>
+						<div class="option add_option">
+							<div class="box">
+								<button class="button" ng-click="addDrQuizOptions(dr.drChild.options, drQuizTabList[dr.drChild.drChildTypeIndex])">보기추가</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-when="multi_choice">
+				<form class="{{drQuizTabList[dr.drChild.drChildTypeIndex]}}">
+					<label>문제</label>
+					<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+					></textarea>
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+							</form>
+						</div>
+					</div>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+					<div class="box">
+						<div class="max_choice">
+							<span class="choice_length">보기 최대 선택 개수</span>
+							<input type="text" ng-model="dr.drChild.maxChoice"/>
+						</div>
+					</div>
+					<div class="option_container multi_choice" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+						<div class="option" ng-repeat="option in dr.drChild.options" dnd-draggable="option" dnd-type="option.type" dnd-disable-if="option.type == 'unknown'" dnd-moved="dr.drChild.options.splice($index, 1)" dnd-effect-allowed="move">
+							<dnd-nodrag>
+								<div class="drag drag_vertical" dnd-handle>&nbsp;</div>
+								<div class="box input-group">
+									<div class="input-group-addon">
+										<input type="checkbox" name="multi_choice_{{$parent.$index}}" value="{{$index}}" class="multi_choice_element" ng-model="option.trueFalse"/>
+									</div>
+									<input type="text" placeholder="선택지를 입력해주세요." ng-model="option.title" ng-click="option_clear_default($parent.$index, $index, $event, option.title, 'option')" ng-blur="option_input_default($parent.$index, $index, $event, option.title, 'option')"
+									>
+								</div>
+								<button class="remove" ng-click="deleteDrQuizOptions($index, dr.drChild.options)"></button>
+							</dnd-nodrag>
+						</div>
+						<div class="dndPlaceholder">보기를 옮겨주세요.</div>
+						<div class="option add_option">
+							<div class="box">
+								<button class="button" ng-click="addDrQuizOptions(dr.drChild.options, drQuizTabList[dr.drChild.drChildTypeIndex])">+ 보기추가</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-when="dropdown">
+				<form class="{{drQuizTabList[dr.drChild.drChildTypeIndex]}}">
+					<label>문제</label>
+					<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+					></textarea>
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+							</form>
+						</div>
+					</div>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+					<div class="option_container dropdownocat" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+						<div class="option" ng-repeat="option in dr.drChild.options" dnd-draggable="option" dnd-type="option.type" dnd-disable-if="option.type == 'unknown'" dnd-moved="dr.drChild.options.splice($index, 1)" dnd-effect-allowed="move">
+							<dnd-nodrag>
+								<div class="drag drag_vertical" dnd-handle>&nbsp;</div>
+								<div class="box">
+									<div class="input-group-addon">
+										<input type="radio" name="drop_down_{{$parent.$index}}" value="{{$index}}" class="single_choice_element" ng-model="dr.correct"/>
+									</div>
+									<input type="text" placeholder="선택지를 입력해주세요." ng-model="option.title" ng-click="option_clear_default($parent.$index, $index, $event, option.title, 'option')" ng-blur="option_input_default($parent.$index, $index, $event, option.title, 'option')"
+									>
+								</div>
+								<button class="remove" ng-click="deleteDrQuizOptions($index, dr.drChild.options)"></button>
+							</dnd-nodrag>
+						</div>
+						<div class="dndPlaceholder">보기를 옮겨주세요.</div>
+						<div class="option add_option">
+							<div class="box">
+								<button class="button" ng-click="addDrQuizOptions(dr.drChild.options, drQuizTabList[dr.drChild.drChildTypeIndex])">+ 보기추가</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-when="description">
+				<form class="drQuizTabList[dr.drChild.drChildTypeIndex]">
+					<label>문제</label>
+					<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+					></textarea>
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+							</form>
+						</div>
+					</div>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+<!-- 					<div class="option_container description" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+						<textarea type="text" rows="2" class="title" placeholder="답변을 입력해주세요." ng-model="dr.answer"></textarea>
+					</div> -->
+				</form>
+			</div>
+			<div ng-switch-when="short_answer">
+				<form class="drQuizTabList[dr.drChild.drChildTypeIndex]">
+					<label>문제</label>
+					<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+					></textarea>
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+							</form>
+						</div>
+					</div>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+					<div class="option_container short_answer" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+						<textarea type="text" rows="2" class="title" placeholder="답변을 입력해주세요." ng-model="dr.answer"></textarea>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-when="true_false">
+				<form class="{{drQuizTabList[dr.drChild.drChildTypeIndex]}}">
+					<label>문제</label>
+					<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+					></textarea>
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+							</form>
+						</div>
+					</div>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+					<div class="option_container true_false">
+						<div class="option">
+							<div class="box input-group">
+								<div class="input-group-addon">
+									<input type="radio" name="true_false_{{$parent.$index}}" value="0" class="single_choice_element" ng-model="dr.correct"/>
+								</div>
+								<span class="preffix true">O</span>
+								<input type="text" value ="O" placeholder="선택지를 입력해주세요." ng-model="dr.optionsTitle1">
+							</div>
+						</div>
+						<div class="option">
+							<div class="box input-group">
+								<div class="input-group-addon">
+									<input type="radio" name="true_false_{{$parent.$index}}" value="1" class="single_choice_element" ng-model="dr.correct"/>
+								</div>
+								<span class="preffix false">X</span>
+								<input type="text" value ="X" placeholder="선택지를 입력해주세요." ng-model="dr.optionsTitle2">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-when="sequence">
+				<form class="{{drQuizTabList[dr.drChild.drChildTypeIndex]}}">
+					<md-input-container class="guiz_title">
+						<label>문제</label>
+						<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title" ng-click="dr_clear_default($index, $event, dr.title, 'dr')" ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+						></textarea>
+						<div class="text_form">
+							<div class="editor">
+								<form method="post">
+									<textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+								</form>
+							</div>
+						</div>
+					</md-input-container>
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+					<div class="option_container sequence" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+						<div class="option" ng-repeat="option in dr.drChild.options" dnd-draggable="option" dnd-type="option.type" dnd-disable-if="option.type == 'unknown'" dnd-moved="dr.drChild.options.splice($index, 1)" dnd-effect-allowed="move">
+							<dnd-nodrag>
+								<div class="drag drag_vertical" dnd-handle>&nbsp;</div>
+								<div class="box input-group">
+									<div class="input-group-addon">
+										<span class="number" ng-model="option.weight">{{$index+1}}</span>
+									</div>
+									<md-input-container class="guiz_option">
+										<label>순서에 맞춰 선택지를 입력해주세요</label>
+										<input type="text" ng-model="option.title" ng-click="option_clear_default($parent.$index, $index, $event, option.title, 'option')" ng-blur="option_input_default($parent.$index, $index, $event, option.title, 'option')">
+									</md-input-container>
+								</div>
+								<button class="remove" ng-click="deleteDrQuizOptions($index, dr.drChild.options)"></button>
+							</dnd-nodrag>
+						</div>
+						<div class="dndPlaceholder">보기를 옮겨주세요.</div>
+						<div class="option add_option">
+							<div class="box">
+								<button class="button" ng-click="addDrQuizOptions(dr.drChild.options, drQuizTabList[dr.drChild.drChildTypeIndex])">+ 보기추가</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-default>
+				<form class="{{drQuizTabList[selectedQuiz]}}">
+					<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+				</form>
+			</div>
+			<div>
+				<form id="setting_quiz">
+					<label>문제 배점</label>
+					<div class="score_container">
+						<div id="set_score" class="box">
+							<label>횟수 배점</label>
+							<input type="text" id="input_quiz_score" placeholder="정답 시 부여할 점수를 입력하세요." ng-model="dr.maxGrade"/>
+						</div>
+						<div class="multiply">X</div>
+						<div id="set_limit" class="box">
+							<label>횟수 제한</label>
+							<input type="text" id="input_quiz_limit" placeholder="오답 시 다시 풀 수 있는 횟수를 입력하세요." ng-model="dr.maxRetry"/>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="box feedback_box clearfix" ng-hide="drQuizTabList[dr.drChild.drChildTypeIndex] == 'description'">
+				<div class="label_box">
+					<h4 class="input_label">문제해설</h4>
+					<span class="hairline"></span>
+				</div>
+
+				<div class="box success_feedback_box clearfix">
+					<div class="text_form">
+						<div class="editor">
+							<form method="post">
+								<textarea ui-tinymce="tinymceOptions" ng-model="dr.feedback"></textarea>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+
+<div class="type_selector select_box" ng-class="{'active':dr.selectedQuizTab}">
+	<div class="type select_option {{drQuizList}}" ng-repeat="drQuizList in drQuizTabList" ng-class="{'selected':isActiveQuiz($index, dr)}" ng-click="selectedQuizFunc($index, dr)">
+		<span class="icon">&nbsp;</span>
+		<span class="label">{{drQuizTabListKo[$index]}}</span>
+	</div>
+</div>
+<!--
+<div class="btn-group" uib-dropdown is-open="status.isopen">
+	<button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+		유형을 선택하세요.<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+		<li ng-repeat="drQuizList in drQuizTabList">
+			<a href="#">{{drQuizTabListKo[$index]}}</a>
+		</li>
+	</ul>
+</div>
+-->

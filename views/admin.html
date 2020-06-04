@@ -1,0 +1,76 @@
+
+<div ng-controller="adminController">
+	<!-- Start #Wrapper -->
+	<div id="wrapper" class="adminpage clearfix">
+		<div id="header_container">
+			<div>
+				<pre>
+					{{ hostinfo }}
+				</pre>
+			</div>
+			<div id="header" class="clearfix">
+				<div class="logo"><img src="/styles/images/public/h_logo.png" alt="Logo" /></div>
+				<div class="buttons" ng-controller="insideCtrl">
+					<button class="button" ng-click="logout()">Logout</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Start #CW Container -->
+		<div id="cw_container" class="clearfix" ng-class="{ 'disable' : disable }">
+			<!-- Start #Large container -->
+			<div class="large_container clearfix">
+				<div class="blocked_content"></div>
+
+				<!-- Start #Save Controller -->
+				<div id="save_container" class="clearfix">
+					<button class="button small revision_button" ng-click="showAdvanced($event, 'revisionDialog.html')">자동저장이력</button>
+				<!--
+				<button class="button small primary save_button" ng-click="showAdvanced($event, 'save_progressDialog.html')">코스저장</button>
+			-->
+			<button class="button small primary save_button" ng-click="migrationToDrupal()">코스저장</button>
+			<button class="button small primary save_button" ng-click="tempLogin()">imoove2 임시로그인</button>
+		</div>
+		<!-- End #Save Controller -->
+
+		<!-- Start #Small container -->
+		<div class="small_container clearfix">
+			<!-- Start #Left sidebar -->
+			<div id="left_sidebar">
+			</div>
+			<div id="setting_container">
+				<div class="setting setting1">
+					<ul>
+						<li id="domain" class="list clearfix">
+							<span class="label">Domain : </span>
+							<input type="text" placeholder="도메인을 입력해주세요." ng-model="domain">
+							<span>{{$scope.domain}}</span>
+						</li>
+						<li id="hostname" class="list clearfix">
+							<span class="label">Hostname : </span>
+							<input type="text" placeholder="호스트네임을 입력해주세요." ng-model="hostname">
+							<span>{{$scope.hostname}}</span>
+						</li>
+						<li id="port" class="list clearfix">
+							<span class="label">Port : </span>
+							<input type="text" placeholder="포트번호를 입력해주세요." ng-model="port">
+							<span>{{$scope.port}}</span>
+						</li>
+						<li id="username" class="list clearfix">
+							<span class="label">Username : </span>
+							<input type="text" placeholder="LMS에 접속할 아이디를 입력해주세요." ng-model="username">
+							<span>{{$scope.username}}</span>
+						</li>
+						<li id="password" class="list clearfix">
+							<span class="label">Password : </span>
+							<input type="text" placeholder="LMS에 접속할 비밀번호를 입력해주세요." ng-model="password">
+							<span>{{$scope.password}}</span>
+						</li>
+					</ul>
+					<button class="button small primary save_button" ng-click="putData()">보내기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

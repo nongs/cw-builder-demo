@@ -1,0 +1,125 @@
+
+<div class="dr dr_homework clearfix" ng-controller="drController" ng-class="{ 'disable':disable }" ng-click="enableDr($event)">
+  <!-- <h3 class="title">LTI</h3> -->
+  <div class="dr_wrapper">
+      <div class="function clearfix">
+        <!-- <button class="icon_button drag drag_horizontal" dnd-handle>이동</button>
+        <span class="separator">&nbsp;</span> -->
+        <button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+        <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+        <button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+        <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+        <button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+        <span class="separator">&nbsp;</span>
+        <button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)">복제</button>
+        <span class="separator">&nbsp;</span>
+        <button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+      </div>
+    <h3 class="dr_type_label">HOMEWORK</h3>
+    <div class="homework_container">
+      <!-- Start 제목 -->
+      <!-- <md-input-container> -->
+        <input class="title page-header" type="text" placeholder="제목을 입력해 주세요"
+        ng-model="dr.title"
+        ng-click="dr_clear_default($index, $event, dr.title, 'dr')"
+        ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+        >
+      <!-- </md-input-container> -->
+      <!-- End 제목 -->
+
+      <!-- Start 설명 -->
+      <!-- <md-input-container> -->
+        <!-- <input class="description page-header" type="text" placeholder="설명을 입력해 주세요"/> -->
+        <!-- <textarea class="description page-header" ng-model="dr.body" placeholder="설명을 입력해 주세요"></textarea> -->
+      <!-- </md-input-container> -->
+      <!-- End 설명 -->
+      <div class="text_form">
+        <div class="editor">
+          <form method="post">
+            <textarea ui-tinymce="tinymceOptions" ng-model="dr.body"></textarea>
+          </form>
+        </div>
+      </div>
+
+      <!-- Start Duration -->
+      <div class="field_group duration clearfix" ng-init="dr.startDate = strToDate(dr.startDate, 'st'); dr.endDate = strToDate(dr.endDate, 'end'); initTime(dr);">
+        <label class="field_label duration_label main">과제 제출 기간</label>
+        <div class="duration clearfix">
+          <div class="duration_container clearfix">
+            <label class="field_label duration_label sub">시작 일시</label>
+            <div class="start_duration">
+                <md-datepicker ng-model="dr.startDate" ng-change="changeToDate(dr,'st')" md-placeholder="시작일" md-open-on-focus class="date start_date"></md-datepicker>
+                <input ng-blur="cgTime(dr, $event, 'start');" type="time" class="date_input set_time" ng-value="dr.startTime">
+            </div>
+          </div>
+          <div class="duration_container clearfix">
+            <label class="field_label duration_label sub">마감 일시</label>
+            <div class="end_duration">
+                <md-datepicker ng-model="dr.endDate" ng-change="changeToDate(dr,'end')" md-placeholder="종료일" md-open-on-focus class="date end_date"></md-datepicker>
+                <input ng-blur="cgTime(dr, $event, 'end');" type="time" class="date_input set_time" ng-value="dr.endTime">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Type -->
+      <!-- <div class="field_group clearfix">
+        <label class="field_label type_label main">제출유형</label>
+        <div class="homework_type clearfix">
+          <div class="type_list">
+            <div class="type video">
+              <input type="checkbox" id="video" ng-model="dr.video"><labal for="video">video</labal>
+            </div>
+            <div class="type sns_link">
+              <input type="checkbox" id="sns_link" ng-model="dr.sns"><labal for="sns_link">소셜미디어링크</labal>
+            </div>
+            <div class="type ssz">
+              <input type="checkbox" id="ssz" ng-model="dr.ssz"><labal for="ssz">SSZ(SilverStream 콘텐츠)</labal>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Start Input file -->
+      <!-- <div class="field_group clearfix">
+        <label class="field_label type_label main">첨부파일 사용 여부</label>
+        <div class="input_file clearfix">
+          <div class="type_list">
+            <div class="type video">
+              <input type="radio" value="yes" name="input_file_{{$index}}" id="use_file" ng-model="dr.inputFile"><labal for="use_file">사용함</labal>
+            </div>
+            <div class="type sns_link">
+              <input type="radio" value="no" name="input_file_{{$index}}" id="no_file" ng-model="dr.inputFile"><labal for="no_file">사용안함</labal>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Start 평가기준 점수 -->
+      <div class="field_group clearfix">
+        <label class="field_label score_label main">평가 기준 점수</label>
+        <div class="score clearfix">
+          <!-- <md-input-container> -->
+            <input class="title page-header" type="text" placeholder="기준점수를 숫자로 입력해주세요." ng-model="dr.score"/>
+          <!-- </md-input-container> -->
+        </div>
+      </div>
+
+      <!-- Start 평가방법 -->
+      <!-- <div class="field_group evaluation clearfix">
+        <label class="field_label evaluation_label main">평가방법</label>
+        <div class="select_evaluation clearfix">
+          <div class="select_box" ng-class="{ 'active' : enable_selectList }" ng-click="click_selectLlist($event)">
+              <div class="select_option selected" ng-click="drHomeworkEvaluation(dr, 'pro')">교수자</div>
+              <div class="select_option" ng-click="drHomeworkEvaluation(dr, 'peer')">Peer to Peer</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="lock">
+    <div class="bg">&nbsp;</div>
+    <div class="icon"></div>
+  </div>
+</div>

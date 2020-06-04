@@ -1,0 +1,54 @@
+
+<md-dialog aria-label="Media">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>미디어</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog" class="close_dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:1100px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <!--<md-tab label="url">
+          <md-content class="md-padding">
+            <md-input-container class="guiz_option">
+				<input type="text" placeholder="공유할 동영상의 URL을 입력해주세요." ng-model="mediaUrl">
+				<div class="describtion" ng-if="showHints">
+					공유할 동영상의 URL을 입력하면 미리보기가 가능합니다.<br />
+					주의사항: 다른 사람이 올린 동영상을 허락 없이 사용하는 행위는 저작권 침해에 해당될 수 있습니다.
+				</div>
+        <md-button class="button" ng-click="answer()">확인</md-button>
+			</md-input-container>
+          </md-content>
+        </md-tab>-->
+        <!-- <md-tab label="Upload">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">개발 중입니다.</h1>
+          </md-content>
+        </md-tab> -->
+        <md-tab label="Commons" ng-click="getMediaIframe()" id="my_content_tab">
+          <md-content class="md-padding" id="my_content_frame">
+            <iframe name="myFrames" id="myMediaFrame" width="980px" height="600px" frameborder="0" border="0"></iframe>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+    <!--
+    <md-dialog-actions layout="row">
+      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+        More on Wikipedia
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" >
+        Not Useful
+      </md-button>
+      <md-button ng-click="answer('useful')" style="margin-right:20px;" >
+        Useful
+      </md-button>
+    </md-dialog-actions>
+    -->
+  </form>
+</md-dialog>

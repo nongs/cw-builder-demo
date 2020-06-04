@@ -1,0 +1,38 @@
+
+<!-- 객관식 -->
+<div ng-switch-when="single_choice">
+	<form class="drQuizTabList[dr.drChild.drChildTypeIndex]">
+		<md-input-container class="guiz_title">
+			<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요." ng-model="dr.title"></textarea>
+		</md-input-container>
+		<dr-quiz-tab-list-directive></dr-quiz-tab-list-directive>
+		<div class="option_container single_choice" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+			<div class="option" ng-repeat="option in dr.drChild.options"
+				dnd-draggable="option"
+				dnd-type="option.type"
+				dnd-disable-if="option.type == 'unknown'"
+				dnd-moved="dr.drChild.options.splice($index, 1)"
+				dnd-effect-allowed="move"
+			>
+				<dnd-nodrag>
+					<div class="drag drag_vertical" dnd-handle>&nbsp;</div>
+					<div class="box input-group">
+						<div class="input-group-addon">
+							<input type="radio" name="single_choice" value="{{$index}}" class="single_choice_element"/>
+						</div>
+						<md-input-container class="guiz_option">
+							<input type="text" placeholder="선택지를 입력해주세요." ng-model="option.title">
+						</md-input-container>
+					</div>
+					<button class="remove" ng-click="deleteDrQuizOptions($index, dr.drChild.options)"></button>
+				</dnd-nodrag>
+			</div>
+			<li class="dndPlaceholder">보기를 옮겨주세요.</li>
+			<div class="option add_option">
+				<div class="box">
+					<button class="button" ng-click="addDrQuizOptions(dr.drChild.options, drQuizTabList[dr.drChild.drChildTypeIndex])">보기추가</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

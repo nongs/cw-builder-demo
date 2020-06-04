@@ -1,0 +1,17 @@
+<div class="dr empty" ng-controller="drController" ng-click="enableDr($event, $index)" ng-class="{ 'disable':disable }">
+    <!-- <button class="icon_button drag drag_horizontal" dnd-handle></button> -->
+    <div class="function clearfix">
+        <button class="icon_button move_up" ng-click="moveSurveyDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+        <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+        <button class="icon_button move_down" ng-click="moveSurveyDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+        <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+        <button class="icon_button add" ng-click="addSurveyDr('none', $index)">추가</button>
+        <span class="separator">&nbsp;</span>
+        <!-- <button class="icon_button copy" ng-click="copyDr(dr)"></button>
+        <span class="separator">&nbsp;</span> -->
+        <button class="icon_button delete" ng-click="deleteSurveyDr($index)">삭제</button>
+    </div>
+    <ul class="list clearfix">
+        <li class="kind {{survey}}" ng-click="addSurveyQuizDr(survey, $parent.$index)" ng-repeat="survey in surveyType">{{surveyTypeKo[$index]}}</li>
+    </ul>
+</div>

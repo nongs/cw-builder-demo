@@ -1,0 +1,19 @@
+<div class="dr empty" ng-controller="drController" ng-class="{ 'disable':disable }" ng-click="enableDr($event)">
+	<!-- <button class="icon_button drag drag_horizontal" dnd-handle></button> -->
+	<div class="function clearfix">
+		<!-- <button class="icon_button drag drag_horizontal" dnd-handle>이동</button>
+		<span class="separator">&nbsp;</span> -->
+	    <button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+	    <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+	    <button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+	    <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+		<button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+		<span class="separator">&nbsp;</span>
+		<!-- <button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)"></button> -->
+		<!-- <span class="separator">&nbsp;</span> -->
+		<button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+	</div>
+	<ul class="list clearfix">
+		<li class="kind {{type.type}}" ng-click="drGetClickIndex(type.type, $index, $parent.$index, $parent.$parent.$index)" ng-repeat="type in drType">{{type.ko}}</li>
+	</ul>
+</div>

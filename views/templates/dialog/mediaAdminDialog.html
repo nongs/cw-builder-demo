@@ -1,0 +1,23 @@
+
+<md-dialog aria-label="Media">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>미디어</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog" class="close_dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:1100px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Commons" ng-click="getMediaIframe()" id="my_content_tab">
+          <md-content class="md-padding" id="my_content_frame">
+            <iframe name="myFrames" id="myMediaFrame" width="360px" height="620px" frameborder="0" border="0"></iframe>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+  </form>
+</md-dialog>

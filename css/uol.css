@@ -1,0 +1,25 @@
+
+/* Public - 공통 form을 정의한다. */
+#left_sidebar * { outline:none; }
+#left_sidebar #uol_container .uol { overflow:hidden; position:relative; height:inherit; margin:5px; padding:0; opacity:1; transition:height .3s ease-out; box-sizing:border-box; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+#left_sidebar #uol_container .uol.closed { height:28px; }
+#left_sidebar #uol_container .uol.active.closed { height:38px; }
+
+/* Toggle arrow */
+#left_sidebar #uol_container .uol > dnd-nodrag { display: block; padding: 5px; }
+#left_sidebar #uol_container .uol > dnd-nodrag > .form_container > .toggle_arrow { display:block; float:left; width:16px; height:28px; margin:0; padding:0; background:transparent url('./image/lnb_sort_open.png') center no-repeat; background-size:10px 10px; box-sizing:content-box; text-decoration:none; }
+#left_sidebar #uol_container .uol > dnd-nodrag > .form_container > .toggle_arrow:hover { background:transparent url('./image/lnb_sort_open_on.png') center no-repeat; background-size:10px 10px; }
+#left_sidebar #uol_container .uol > dnd-nodrag > .form_container > .toggle_arrow.closed { background:transparent url('./image/lnb_sort_closed.png') center no-repeat; opacity:1; background-size:10px 10px; }
+#left_sidebar #uol_container .uol > dnd-nodrag > .form_container > .toggle_arrow.closed:hover { background:transparent url('./image/lnb_sort_closed_on.png') center no-repeat; background-size:10px 10px; }
+
+/* Chapter */
+#left_sidebar #uol_container .uol .active_radio { display:none; }
+
+/* inner Form */
+#left_sidebar #uol_container .uol .chapter { height:28px; padding:0 6px; border-radius:0; border:none; background-color:transparent; font-size:12px; color:#212121; line-height:28px; }
+#left_sidebar #uol_container .uol form input[type='text'] { height:32px; padding:2px 5px; margin:0; border-radius:0; border:none; background-color:#fff; font-size:14px; line-height:20px; outline:none; box-shadow:none; -webkit-transition:none !important; transition:none !important; }
+#left_sidebar #uol_container .uol form input[type='text']:hover { border:1px solid #0072e8; background-color: transparent; }
+#left_sidebar #uol_container .uol form input[type='text']:focus { border:1px solid #0072e8; background-color: #fbf8ef; }
+
+#left_sidebar #uol_container .uol .datepicker { display:none; }
+#left_sidebar #uol_container .uol.selected .datepicker { display:block; }

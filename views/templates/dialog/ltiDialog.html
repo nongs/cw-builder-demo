@@ -1,0 +1,152 @@
+
+<md-dialog aria-label="lti">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>LTI</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog" class="close_dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+     <div class="md-dialog-content dr_lti">
+        <!-- Start 마감이 지난 성적 받아들이기 -->
+        <div class="form_group group1">
+          <label>마감이 지난 성적 받아들이기</label>
+          <div class="input_group">
+            <input type="radio" name="accept_old_value" value="y" id="ov1" ng-click="ltiGetPastGrade('yes')"/>
+            <label for="ov1">사용함</label>
+            <input type="radio" name="accept_old_value" value="n" id="ov2" ng-click="ltiGetPastGrade('no')"/>
+            <label for="ov2">사용안함</label>
+          </div>
+        </div>
+        <!-- End 마감이 지난 성적 받아들이기 -->
+
+        <!-- Start 버튼 텍스트 -->
+        <div class="form_group group2">
+          <label>버튼 텍스트</label>
+          <div class="input_group">
+            <!-- <md-input-container> -->
+              <!-- <label>버튼의 사용자 지정 레이블</label> -->
+              <input type="text" name="button_text_label" class="plain" ng-model="ltiObject.buttonText" placeholder="버튼의 사용자 지정 레이블" />
+            <!-- </md-input-container> -->
+            <span class="description">써드파티 LTI 응용 프로그램을 실행하는 버튼에 대한 사용자 지정 레이블을 입력한다.</span>
+          </div>
+        </div>
+        <!-- End 버튼 텍스트 -->
+
+        <!-- Start 사용자 지정 매개변수 -->
+        <div class="form_group group3">
+          <label>사용자 지정 매개변수</label>
+          <div class="input_group">
+            <button class="button smallest">+ 추가</button>
+          </div>
+        </div>
+        <!-- End 사용자 지정 매개변수 -->
+
+        <!-- Start 표시 이름 -->
+        <div class="form_group group4">
+          <label>표시 이름</label>
+          <div class="input_group">
+            <input type="radio" name="visible" value="y" id="v1"  ng-click="ltiExpressionName('yes')"/>
+            <label for="v1">사용함</label>
+            <input type="radio" name="visible" value="n" id="v2"  ng-click="ltiExpressionName('no')"/>
+            <label for="v2">사용안함</label>
+          </div>
+        </div>
+        <!-- End 표시 이름 -->
+
+        <!-- Start LTI ID -->
+        <div class="form_group group5">
+          <label>LTI ID</label>
+          <div class="input_group">
+            <div class="lti_id container">&nbsp;</div>
+          </div>
+        </div>
+        <!-- End LTI ID -->
+
+        <!-- Start LTI URL -->
+        <div class="form_group group6">
+          <label>LTI URL</label>
+          <div class="input_group">
+            <!-- <md-input-container> -->
+              <!-- <label>URL</label> -->
+              <input type="text" class="plain" ng-model="ltiObject.ltiUrl" placeholder="URL" />
+            <!-- </md-input-container> -->
+            <button class="button smallest" type="button">추가</button>
+          </div>
+        </div>
+        <!-- End LTI URL -->
+
+        <!-- Start 새 페이지에서 열기 -->
+        <div class="form_group group7">
+          <label>새 페이지에서 열기</label>
+          <div class="input_group">
+            <input type="radio" name="target_blank" value="y" id="t1" ng-click="ltiNewPageOpen('yes')"/>
+            <label for="t1">사용함</label>
+            <input type="radio" name="target_blank" value="n" id="t2" ng-click="ltiNewPageOpen('no')"/>
+            <label for="t2">사용안함</label>
+          </div>
+        </div>
+        <!-- End 새 페이지에서 열기 -->
+
+        <!-- Start 새 페이지에서 열기 옵션 -->
+        <div class="description_for_option">
+          <div class="option_group">
+            <!-- Start 이용자 이메일 요청하기 -->
+            <div class="email_option">
+              <label>이용자 이메일 요청하기</label>
+              <div class="option_box">
+                <input type="radio" name="request_email" value="y" id="re1" ng-click="ltiRequestUserEmail('yes')"/>
+                <label for="re1">사용함</label>
+                <input type="radio" name="request_email" value="n" id="re2" ng-click="ltiRequestUserEmail('no')"/>
+                <label for="re2">사용안함</label>
+              </div>
+            </div>
+            <!-- End 이용자 이메일 요청하기 -->
+
+            <!-- Start 이용자의 사용자이름 요청하기 -->
+            <div class="email_option">
+              <label>이용자의 사용자이름 요청하기</label>
+              <div class="option_box">
+                <input type="radio" name="request_name" value="y" id="rn1" ng-click="ltiRequestUserName('yes')"/>
+                <label for="rn1">사용함</label>
+                <input type="radio" name="request_name" value="n" id="rn2" ng-click="ltiRequestUserName('no')"/>
+                <label for="rn2">사용안함</label>
+              </div>
+            </div>
+            <!-- End 이용자의 사용자이름 요청하기 -->
+          </div>
+        </div>
+        <!-- End 새 페이지에서 열기 옵션 -->
+
+        <!-- Start 득점 -->
+        <div class="form_group group8">
+          <label>득점</label>
+          <div class="input_group">
+            <input type="radio" name="gain_point" value="y" id="p1" ng-click="ltiGettingScore('yes')"/>
+            <label for="p1">사용함</label>
+            <input type="radio" name="gain_point" value="n" id="p2" ng-click="ltiGettingScore('no')"/>
+            <label for="p2">사용안함</label>
+          </div>
+        </div>
+        <!-- End 득점 -->
+
+        <!-- Start 가중치 -->
+        <div class="form_group group9">
+          <label>가중치</label>
+          <div class="input_group">
+            <input type="radio" name="extra_point" value="y" id="e1" ng-click="ltiGettingWeigth('no')"/>
+            <label for="e1">사용함</label>
+            <input type="radio" name="extra_point" value="n" id="e2" ng-click="ltiGettingWeigth('no')"/>
+            <label for="e2">사용안함</label>
+          </div>
+        </div>
+        <!-- End 가중치 -->
+      </div>
+      <button class="button" ng-click="ltiAnswer()">확인</button>
+    </md-dialog-content>
+  </form>
+</md-dialog>

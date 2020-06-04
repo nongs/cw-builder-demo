@@ -1,0 +1,41 @@
+
+<md-dialog aria-label="revision" id="revisionDialog">
+	<form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>자동저장이력</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog" class="close_dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="revision_list_container">
+      <div id="revision_list">
+        <ul>
+          <li class="list clearfix" ng-repeat="revision in revisions">
+            <!-- Start Save Date -->
+            <div class="save_date">
+              <span class="field_content">{{ revision.day }}</span>
+              <span class="field_content">{{ revision.time }}</span>
+              <span class="field_content">{{ revision.type }}</span>
+              <span class="field_content">{{ revision.title }}</span>
+              <span class="field_content">{{ revision.action }}</span>
+            </div>
+            <!-- Start Save Date -->
+
+            <!-- Start Controller -->
+            <div class="controller">
+              <button class="button smallest" ng-click="toDbGetDataDialog(revision.full)">복원</button>
+            </div>
+            <!-- Start Controller -->
+          </li>
+        </ul>
+      </div>
+    </md-dialog-content>
+    <div class="footer">
+      <button class="button smallest border" ng-click="toDbDeleteDataDialog($event)">모두 삭제</button>
+      <button class="button smallest border" ng-click="toDbPutDataDialog($event)">저장</button>
+    </div>
+    </form>
+</md-dialog>

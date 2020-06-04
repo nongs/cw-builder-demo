@@ -1,0 +1,31 @@
+
+<div class="poll" ng-click="enablePoll($event)" ng-repeat="poll in pollList">
+	<div class="drag drag_horizontal"></div>
+	<div class="function clearfix">
+		<button class="icon_button copy" ng-click="copyDr(dr)"></button>
+		<button class="icon_button delete" ng-click="deleteDr($index)"></button>
+		<button class="icon_button more"></button>
+	</div>
+
+	<!-- Start Poll -->
+	<div ng-switch="poll.type">
+		<div ng-switch-when="single_choice">
+			<!-- 객관식 -->
+			<poll-single-choice-directive></poll-single-choice-directive>
+		</div>
+		<div ng-switch-when="short_answer">
+			<!-- 단답형 -->
+			<poll-short-answer-directive></poll-short-answer-directive>
+		</div>
+
+		<div ng-switch-when="description">
+			<!-- 서술형 -->
+			<poll-description-directive></poll-description-directive>
+		</div>
+		<div ng-switch-default>
+			<!-- 해당사항 없음 -->
+			<poll-none-directive></poll-none-directive>
+        </div>
+	</div>
+	<!-- End Poll -->
+</div>

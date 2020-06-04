@@ -1,0 +1,36 @@
+
+<div class="dr dr_quiz clearfix" ng-controller="drController" ng-click="enableDr($event, $index)">
+	<div class="drag drag_horizontal"></div>
+	<div class="function clearfix">
+	    <button class="icon_button move_up" ng-click="moveSurveyDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+	    <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+	    <button class="icon_button move_down" ng-click="moveSurveyDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+	    <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+		<button class="icon_button add" ng-click="addSurveyQuizDr('none', $index)">추가</button>
+		<span class="separator">&nbsp;</span>
+		<button class="icon_button copy" ng-click="copySurveyDr(dr, $parent.$index)">복제</button>
+		<span class="separator">&nbsp;</span>
+		<button class="icon_button delete" ng-click="deleteSurveyDr($index)">삭제</button>
+	</div>
+	<div class="dr_wrapper">
+		<h4>- 단답형 -</h4>
+		<form class="short_answer">
+			<!-- <md-input-container class="guiz_title"> -->
+			<textarea type="text" rows="2" class="title" placeholder="질문을 입력해주세요."
+			ng-model="dr.title"
+			ng-click="survey_clear_default($index, dr.title, 'survey')"
+			ng-blur="survey_input_default($index, dr.title, 'survey')"
+			></textarea>
+			<div class="option_container short_answer" dnd-list="dr.drChild.options" dnd-allowed-types="dr.drChild.allowedTypes">
+				<div class="editor">
+					<form method="post">
+						<textarea ui-tinymce="tinymceOptions" ng-model="dr.drChild.body"></textarea>
+					</form>
+				</div>
+				<!-- <md-input-container> -->
+				<textarea type="text" rows="2" class="title" placeholder="답변을 입력해주세요." ng-model="dr.answer"></textarea>
+				<!-- </md-input-container> -->
+			</div>
+		</form>
+	</div>
+</div>

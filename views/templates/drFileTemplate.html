@@ -1,0 +1,70 @@
+
+<div class="dr dr_file" ng-controller="drController" ng-class="{ 'disable':disable }" ng-click="enableDr($event)">
+	<div class="dr_wrapper">
+		<div class="function clearfix">
+			<!-- <button class="icon_button drag drag_horizontal" dnd-handle>이동</button>
+			<span class="separator">&nbsp;</span> -->
+		    <button class="icon_button move_up" ng-click="moveDr(dr, $parent.$index, 'up')" ng-class="{ hidden:$first }">위로 이동</button>
+		    <span class="separator" ng-class="{ hidden:$first }">&nbsp;</span>
+		    <button class="icon_button move_down" ng-click="moveDr(dr, $parent.$index, 'down')" ng-class="{ hidden:$last }">아래로 이동</button>
+		    <span class="separator" ng-class="{ hidden:$last }">&nbsp;</span>
+			<button class="icon_button add" ng-click="addDr('none', $parent.$index, $parent.$parent.$index)">추가</button>
+			<span class="separator">&nbsp;</span>
+			<button class="icon_button copy" ng-click="copyDr(dr, $parent.$index)">복제</button>
+			<span class="separator">&nbsp;</span>
+			<button class="icon_button delete" ng-click="deleteDr($index)">삭제</button>
+		</div>
+      <h3 class="dr_type_label">FILE</h3>
+
+		<input type="text" class="title" placeholder="제목을 입력해 주세요"
+		ng-model="dr.title"
+		ng-click="dr_clear_default($index, $event, dr.title, 'dr')"
+		ng-blur="dr_input_default($index, $event, dr.title, 'dr')"
+		/>
+
+		<div flow-init="{singleFile:true}" flow-files-submitted="$flow.upload()" flow-file-added="isFileAdded($file, $event, $flow)" class="uploader">
+			<div class="drop" flow-drop="" ng-class="dropClass">
+				<button class="button" flow-btn="">파일 업로드
+					<input type="file" multiple="multiple" style="visibility: hidden; position: absolute;">
+				</button>
+				<p>파일을 이곳에 드래그 & 드롭하여 업로드 하세요.</p>
+				<p>지원 가능 확장자 : pptx, html, hwp, psd, xlsx , zip, pdf, mp4</p>
+			</div>
+			<div>
+				<div ng-if="$flow.files[0] != null" class="file_progress">
+					<div ng-repeat="file in $flow.files" class="transfer-box ng-scope ng-binding">
+						{{file.name}}
+						<div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+								<span class="sr-only ng-binding">{{file.progress()}}% Complete</span>
+							</div>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+								Cancel
+							</a>
+						</div>
+					</div>
+				</div>
+				<div ng-if="$flow.files[0] == null && dr.files[0] != null">
+					<div ng-repeat="file in dr.files" class="transfer-box ng-scope ng-binding">
+						{{file.filename}}
+						<div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+								<span class="sr-only ng-binding">{{file.progress()}}% Complete</span>
+							</div>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-xs btn-danger" ng-click="fileUploadCancleTemp(dr)">
+								Cancel
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="well">
+					<a class="btn btn-small btn-success" ng-click="fileUploadTemp($flow, dr);">파일 저장</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+
+<md-dialog aria-label="save_content" id="save_progressDialog">
+	<form>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>코스저장</h2>
+				<span flex></span>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="message">
+					<div class-="message_wrapper" style="width: 300px; margin: auto;">
+						<div class="export_processing" style="display: inline-block;"><img style=" width: 37px; margin-right: 20px;" src="/styles/images/imoove2_revise/export_dialog/export_processing_1.png" alt="강좌 데이터 검수 중..."/></div>
+						<div class="export_processing" style="display: inline-block;"><img style="width: 100px;" src="/styles/images/imoove2_revise/export_dialog/export_processing.gif" alt="강좌 데이터 검수 중..."/></div>
+						<div class="export_processing" style="display: inline-block;"><img style=" width: 65px; margin-left: 20px;" src="/styles/images/imoove2_revise/export_dialog/export_processing_2.png" alt="강좌 데이터 검수 중..."/></div>
+					</div>
+			</div>
+			<div class="progress-message">강좌 데이터 검수 중...</div>
+			<div class="col-sm-12 progress-bar-wrapper">
+				<uib-progressbar class="progress-striped" value="exportProgress">{{exportProgress}}%</uib-progressbar>
+			</div>
+			<div class="dialog_footer clearfix">
+				<button class="button border complete_button primary" ng-click="cancel()">확인</button>
+				<button class="button border complete_button primary" ng-click="goto_lms()">IMOOVE로 이동</button>
+				<!-- <div class="download_button clearfix">
+					<button class="button invert download" ng-click="exportingFileDownload('olx')">OLX포맷으로 다운로드(edx)</button>
+					<button class="button invert download" ng-click="exportingFileDownload('ims')">IMS포맷으로 다운로드(moodle)</button>
+				</div> -->
+			</div>
+		</md-dialog-content>
+	</form>
+</md-dialog>

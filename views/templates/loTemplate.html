@@ -1,0 +1,49 @@
+
+<ul dnd-list="uol.lo" class="lo_list clearfix" dnd-allowed-types="uol.allowedTypes">
+	<li class="lo {{ 'lo_' + $index }} clearfix" ng-class="{ closed:lo.closed, active:lo.active, selected:lo.selected }"
+	ng-repeat="lo in uol.lo"
+	dnd-draggable="lo"
+	dnd-type="lo.type"
+	dnd-disable-if="lo.type == 'unknown'"
+	dnd-moved="uol.lo.splice($index, 1)"
+	dnd-effect-allowed="move">
+	<dnd-nodrag>
+		<div class="controller clearfix" ng-class="{ selected : lo.selected }">
+			<!-- <button class="icon_button small drag" dnd-handle>이동</button>
+			<span class="separator">&nbsp;</span> -->
+			<!-- <button class="icon_button small add" ng-click="addLo($parent.$index)">추가</button>
+			<span class="separator">&nbsp;</span> -->
+			<button class="icon_button small copy" ng-click="copyLo(lo)">복제</button>
+			<span class="separator">&nbsp;</span>
+			<button class="icon_button small delete" ng-click="deleteLo($index)">삭제</button>
+		</div>
+		<div class="form_container form_container_lo">
+			<!-- <a class="toggle_arrow {{ 'lo_' + $index }}" ng-click="toggle_form_lo($index, $event, lo)" ng-class="{ closed:lo.closed }">&nbsp;</a> -->
+			<form ng-click="active_form_lo($index, $event, uol, lo)" class="{{ 'lo_' + $index + '_form'}}">
+				<div class="input-group" ng-click="selectedLoFunc($parent.$index, $index)">
+					<div class="lo_wrapper">
+						<div class="icon_button drag drag_vertical" dnd-handle>&nbsp;</div>
+						<!-- <h2 class="lo_title">{{$parent.$index+1}}.{{$index+1}}</h2> -->
+						<input type="text" class="input_lo_title form-control" readonly="true"
+						ng-model="lo.title"
+						ng-click="lo_clear_default($parent.$index, $index, $event, lo.title, 'lo')"
+						ng-blur="lo_input_default($parent.$index, $index, $event, lo.title, 'lo')"
+						>
+						<div class="active_radio">&nbsp;</div>
+					</div>
+					<!-- <md-radio-button></md-radio-button> -->
+				</div>
+			</form>
+		</div>
+		<div class="drg_container">
+			<div>
+				<drg-directive></drg-directive>
+				<!-- <button id="add_lo" class="button" ng-click="addLo($index)">소주제추가</button> -->
+			</div>
+		</div>
+	</dnd-nodrag>
+</li>
+<li class="dndPlaceholder">
+	소주제를 옮겨주세요.
+</li>
+</ul>

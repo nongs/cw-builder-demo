@@ -1,0 +1,34 @@
+/* ========== dr_quiz.css ========== */
+
+.dr .quiz .type_selector {  }
+
+.dr .option .box .max_choice span{ line-height: 80px; margin-right: 10px; color: #A9A9A9; }
+.dr .option .box .max_choice input{ width: 80px; height: 40px; border: 1px solid #ccc; text-align: center; }
+
+/* 설문지 */
+.dr .poll .range { margin-bottom:30px; }
+.dr .poll .range .value { float:left; width:15%; height:66px; text-align:center; line-height:98px; }
+.dr .poll .range .low { margin-right:5%; }
+.dr .poll .range .high { margin-left:5%; }
+.dr .poll .range .selector_container { float:left; width:60%; }
+.dr .poll .range .selector_container .selector { float:left; width:20%; text-align:center; }
+.dr .poll .range .selector_container .selector span.number { display:inline-block; margin-bottom:10px; }
+.dr .poll .range .selector_container .selector .choice { width:100%; padding:10px 0; background-color:#f2f2f2; }
+.dr .poll .range .selector_container .selector .single_choice_element { margin:0 auto; }
+.dr .poll .add_selector { position:relative; margin-bottom:30px; }
+.dr .poll .add_selector .separator { float:left; height:39px; margin:0 15px; line-height:39px; }
+.dr .poll .add_selector .select_box { float:left; position:relative; }
+.dr .poll .add_selector .start_number .select_box.active { height:78px; }
+.dr .poll .add_selector .end_number .select_box.active { height:351px; }
+.dr .poll .add_selector .select_box .select_option { padding:0 60px 0 30px; }
+.dr .poll .input_poll_value { clear:both; width:100%; }
+.dr .poll .input_poll_value .input_value { margin-bottom:10px; }
+.dr .poll .input_poll_value .number { width:46px; float:left; font-size:16px; text-align:center; line-height:20px; }
+.dr .poll .input_poll_value input[type="text"] { width:calc(100% - 46px); border-bottom:1px solid #ccc; }
+
+
+/* quiz layout 정리 */
+dnd-nodrag { overflow:hidden; }
+.option_container { margin-bottom:20px; }
+.input-group-addon { border-radius:0; }
+.guiz_option input { width:100%; padding:6px 12px; }
